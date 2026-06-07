@@ -22,6 +22,9 @@
 
 def coffee_machine():
     not_broken = True
+    water = 300 # 3000 max
+    milk = 200 # 2000 max
+    coffee = 100 # 1000 max
     while not_broken:
         coffee_type = input('What would you like? ([e]spresso/[l]atte/[c]appuccino): ')
         print(coffee_type)
