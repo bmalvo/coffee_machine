@@ -18,6 +18,7 @@
 
 # 1 user input
 # 2 build 'off' button
+# 3 print report
 
 
 def coffee_machine():
@@ -25,11 +26,19 @@ def coffee_machine():
     water = 300 # 3000 max
     milk = 200 # 2000 max
     coffee = 100 # 1000 max
+    money = 0
     while not_broken:
         coffee_type = input('What would you like? ([e]spresso/[l]atte/[c]appuccino): ')
         print(coffee_type)
         if coffee_type == 'off':
             not_broken = False
+        if coffee_type == 'report':
+            print(f"""
+            Water: {water}ml
+            Milk: {milk}ml
+            Coffee: {coffee}g
+            Money: ${money}
+            """)
     return
 
 coffee_machine()
