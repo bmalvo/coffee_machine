@@ -21,6 +21,7 @@
 # 3 print report
 # 4 Check resources sufficient
 # 5 Process coins
+# 6 Check transaction successful
 
 
 def coffee_machine():
@@ -29,6 +30,7 @@ def coffee_machine():
     milk = 200 # 2000 max
     coffee = 100 # 1000 max
     money = 0
+    pay = 0
     recipes = {
         'e': {
         'water': 50,
@@ -55,7 +57,7 @@ def coffee_machine():
     }
     while not_broken:
         coffee_type = input('What would you like? ([e]spresso/[l]atte/[c]appuccino): ')
-        print(recipes[coffee_type])
+        # print(recipes[coffee_type])
         if coffee_type in recipes:
             if water - recipes[coffee_type]['water'] < 0:
                 print('Sorry there is not enough water.')
@@ -75,7 +77,8 @@ def coffee_machine():
             Coffee: {coffee}g
             Money: ${money}
             """)
-        pay = 0
+            break
+        # pay = 0
         coin = True
         print(f'''
         Please insert coins. ${recipes[coffee_type]['price']}
@@ -93,6 +96,12 @@ def coffee_machine():
             if coin == 'f':
                 break
         print(f'inserted coins: {pay}')
+        if recipes[coffee_type]['price'] > pay:
+            print("Sorry that's not enough money. Money refunded.")
+            pay = 0
+        else:
+            money = pay
+            pay = 0
     return
 
 coffee_machine()
