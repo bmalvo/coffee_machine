@@ -1,21 +1,3 @@
-# code will be here
-# ingredients capacity: 3000ml - water, 2000ml - milk, 1000g - coffee
-#  recipes:
-#   espresso :
-#         50ml - water
-#         18g - cofee
-#         $1.50 - cost
-#   late :
-#         200ml - water
-#         24g - cofee
-#         150ml - milk
-#         $2.50 - cost
-#   cappuccino :
-#         250ml - water
-#         24g - cofee
-#         100ml - milk
-#         $3.00 - cost
-
 # 1 user input
 # 2 build 'off' button
 # 3 print report
@@ -62,7 +44,6 @@ def coffee_machine():
     }
     while not_broken:
         coffee_type = input('What would you like? ([e]spresso/[l]atte/[c]appuccino): ')
-        # print(recipes[coffee_type])
         if coffee_type in recipes:
             if water - recipes[coffee_type]['water'] < 0:
                 print('Sorry there is not enough water.')
@@ -73,17 +54,19 @@ def coffee_machine():
             if milk - recipes[coffee_type]['milk'] < 0:
                 print('Sorry there is not enough milk.')
                 break
-        if coffee_type == 'off':
-            not_broken = False
-        if coffee_type == 'report':
+        elif coffee_type == 'off':
+            break
+        elif coffee_type == 'report':
             print(f"""
             Water: {water}ml
             Milk: {milk}ml
             Coffee: {coffee}g
             Money: ${money}
             """)
-            break
-        # pay = 0
+            continue
+        else:
+            print('Wrong command. Try again')
+            continue
         coin = True
         print(f'''
         Please insert coins. ${recipes[coffee_type]['price']}
@@ -94,13 +77,10 @@ def coffee_machine():
             coin = input('insert coin: ')
             if coin in coins.keys():
                 pay += coins[coin]
-                print(f'coin {coins[coin]}')
-                print(f'pay {pay}')
             else:
                 print('Incorrect coin')
             if coin == 'f':
                 break
-        print(f'inserted coins: {pay}')
         if recipes[coffee_type]['price'] > pay:
             print("Sorry that's not enough money. Money refunded.")
             pay = 0
@@ -115,5 +95,6 @@ def coffee_machine():
             coffee = coffee - recipes[coffee_type]['coffee']
             print(f'Here is your {recipes[coffee_type]['name']}. Enjoy!')
     return
+
 
 coffee_machine()
