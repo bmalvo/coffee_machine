@@ -23,6 +23,7 @@
 # 5 Process coins
 # 6 Check transaction successful
 # 6.1 Offer change
+# 7 Make coffee
 
 
 def coffee_machine():
@@ -34,16 +35,19 @@ def coffee_machine():
     pay = 0
     recipes = {
         'e': {
-        'water': 50,
-        'coffee': 18,
-        'milk': 0,
-        'price': 1.50},
+            'name': 'espresso',
+            'water': 50,
+            'coffee': 18,
+            'milk': 0,
+            'price': 1.50},
         'l': {
+            'name': 'latte',
             'water': 200,
             'coffee': 24,
             'milk': 150,
             'price': 2.50},
         'c': {
+            'name': 'cappuccino',
             'water': 250,
             'coffee': 24,
             'milk': 100,
@@ -104,8 +108,12 @@ def coffee_machine():
             if pay > recipes[coffee_type]['price']:
                 change = round(pay - recipes[coffee_type]['price'] ,2)
                 print(f'Here is ${change} dollars in change.')
-            money = pay
-            pay = 0
+                money = pay - change
+                pay = 0
+            water = water - recipes[coffee_type]['water']
+            milk = milk - recipes[coffee_type]['milk']
+            coffee = coffee - recipes[coffee_type]['coffee']
+            print(f'Here is your {recipes[coffee_type]['name']}. Enjoy!')
     return
 
 coffee_machine()
