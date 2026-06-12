@@ -22,6 +22,7 @@
 # 4 Check resources sufficient
 # 5 Process coins
 # 6 Check transaction successful
+# 6.1 Offer change
 
 
 def coffee_machine():
@@ -100,6 +101,9 @@ def coffee_machine():
             print("Sorry that's not enough money. Money refunded.")
             pay = 0
         else:
+            if pay > recipes[coffee_type]['price']:
+                change = round(pay - recipes[coffee_type]['price'] ,2)
+                print(f'Here is ${change} dollars in change.')
             money = pay
             pay = 0
     return
